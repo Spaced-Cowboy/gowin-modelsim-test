@@ -3,6 +3,8 @@ Simple test project to work out how to get Gowin's FPGA software to work with Mo
 
 This is the result of trying a new FPGA environment (Gowin) and a new Simulator (Modelsim) and trying to get them to work together. 
 
+The newer version adds two rPLL instances, configured to be appropriate for a 400MHz DDR3 controller
+
 # Steps to build:
 
 - Open up the test.gprj in the top level folder you checked this out into

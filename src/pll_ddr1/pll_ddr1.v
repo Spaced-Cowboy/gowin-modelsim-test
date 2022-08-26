@@ -4,17 +4,20 @@
 //GOWIN Version: V1.9.8.07
 //Part Number: GW2A-LV18PG256C8/I7
 //Device: GW2A-18
-//Created Time: Thu Aug 25 18:50:57 2022
+//Created Time: Fri Aug 26 13:44:52 2022
 
-module Gowin_rPLL (clkout, lock, reset, clkin);
+module pll_ddr1 (clkout, lock, clkoutp, clkoutd, reset, clkin, psda, dutyda, fdly);
 
 output clkout;
 output lock;
+output clkoutp;
+output clkoutd;
 input reset;
 input clkin;
+input [3:0] psda;
+input [3:0] dutyda;
+input [3:0] fdly;
 
-wire clkoutp_o;
-wire clkoutd_o;
 wire clkoutd3_o;
 wire gw_gnd;
 
@@ -23,8 +26,8 @@ assign gw_gnd = 1'b0;
 rPLL rpll_inst (
     .CLKOUT(clkout),
     .LOCK(lock),
-    .CLKOUTP(clkoutp_o),
-    .CLKOUTD(clkoutd_o),
+    .CLKOUTP(clkoutp),
+    .CLKOUTD(clkoutd),
     .CLKOUTD3(clkoutd3_o),
     .RESET(reset),
     .RESET_P(gw_gnd),
@@ -33,16 +36,16 @@ rPLL rpll_inst (
     .FBDSEL({gw_gnd,gw_gnd,gw_gnd,gw_gnd,gw_gnd,gw_gnd}),
     .IDSEL({gw_gnd,gw_gnd,gw_gnd,gw_gnd,gw_gnd,gw_gnd}),
     .ODSEL({gw_gnd,gw_gnd,gw_gnd,gw_gnd,gw_gnd,gw_gnd}),
-    .PSDA({gw_gnd,gw_gnd,gw_gnd,gw_gnd}),
-    .DUTYDA({gw_gnd,gw_gnd,gw_gnd,gw_gnd}),
-    .FDLY({gw_gnd,gw_gnd,gw_gnd,gw_gnd})
+    .PSDA(psda),
+    .DUTYDA(dutyda),
+    .FDLY(fdly)
 );
 
 defparam rpll_inst.FCLKIN = "25";
 defparam rpll_inst.DYN_IDIV_SEL = "false";
 defparam rpll_inst.IDIV_SEL = 0;
 defparam rpll_inst.DYN_FBDIV_SEL = "false";
-defparam rpll_inst.FBDIV_SEL = 13;
+defparam rpll_inst.FBDIV_SEL = 15;
 defparam rpll_inst.DYN_ODIV_SEL = "false";
 defparam rpll_inst.ODIV_SEL = 2;
 defparam rpll_inst.PSDA_SEL = "0000";
@@ -61,4 +64,4 @@ defparam rpll_inst.CLKOUTD_SRC = "CLKOUT";
 defparam rpll_inst.CLKOUTD3_SRC = "CLKOUT";
 defparam rpll_inst.DEVICE = "GW2A-18";
 
-endmodule //Gowin_rPLL
+endmodule //pll_ddr1

@@ -14,8 +14,10 @@ vlib work
 vmap work work
 vlog -work work "prim_sim.v"
 vlog -work work {top.v}
+vlog -work work {ddr_clocking.v}
 vlog -work work {top_tb.v}
-vlog -work work {gowin_rpll/gowin_rpll.v}
+vlog -work work {pll_ddr1/pll_ddr1.v}
+vlog -work work {pll_ddr2/pll_ddr2.v}
 
 
 #
